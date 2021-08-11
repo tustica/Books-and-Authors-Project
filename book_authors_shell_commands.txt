@@ -1,0 +1,71 @@
+Books/Authors(shell)
+
+> Book.objects.create(title="Grapes of Wrath", desc="cool book!")
+<Book: Book object (1)>
+>>> Book.objects.create(title="Love Does", desc="great book")
+<Book: Book object (2)>
+>>> Book.objects.create(title="Descartes", desc="philosphy book")
+<Book: Book object (3)>
+>>> Book.objects.create(title="Every man dies alone", desc="WWII book")
+<Book: Book object (4)>
+>>> Book.objects.create(title="Count of Monte Cristo", desc="fun story")
+<Book: Book object (5)>
+
+ Author.objects.create(first_name = "Jane", last_name="Austen") 
+<Author: Author object (1)>
+>>> Author.objects.create(first_name = "Emily", last_name="Dickinson")
+<Author: Author object (2)>
+>>> Author.objects.create(first_name = "Fyodor", last_name="Dostoevsky")
+<Author: Author object (3)>
+>>> Author.objects.create(first_name = "Will", last_name="Shakespeare")   
+<Author: Author object (4)>
+>>> Author.objects.create(first_name = "Lau", last_name="Tzu")           
+<Author: Author object (5)>
+
+new_name = Author.objects.get(id=4)
+>>> new_name.first_name = "Bill"
+>>> print(new_name.first_name)
+Bill
+
+ first_author = Author.objects.get(id=1)
+>>> first_book = Book.objects.get(id=1)
+>>> second_book = Book.objects.get(id=1)
+>>> third_book = Book.objects.get(id=3)
+>>> second_book = Book.objects.get(id=2)
+>>> first_author.add(first_book, second_book, third_book)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Author' object has no attribute 'add'
+>>> first_author.books.add(first_book, second_book, third_book)
+
+> second_author = Author.objects.get(id=2)
+>>> second_author.books.add(first_book, second_book)
+>>> third_author = Author.objects.get(id=3)
+>>> third_author.books.add(first_book, second_book, third_book)
+>>> print(third_book)
+Book object (3)
+>>> third_book.authors.all()
+<QuerySet [<Author: Author object (1)>, <Author: Author object (3)>]>
+>>> print(third_book.authors.all()
+... )
+<QuerySet [<Author: Author 
+
+ for book in books:
+...     print(book.authors.all())
+... 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'books' is not defined
+>>> for book in Book.objects.all():
+...     print(book.authors.all())
+... 
+<QuerySet [<Author: Author object (1)>, <Author: Author object (2)>, <Author: Author object (3)>]>
+<QuerySet [<Author: Author object (1)>, <Author: Author object (2)>, <Author: Author object (3)>]>
+<QuerySet [<Author: Author object (3)>]>
+<QuerySet []>
+<QuerySet []>
+
+ print(third_author.books.all())
+
+print(Book.objects.get(id=5).authors.all())
+<QuerySet []>

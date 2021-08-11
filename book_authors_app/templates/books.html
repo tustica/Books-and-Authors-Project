@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Books View</title>
+</head>
+<body>
+    <div id="books_container">
+        <a href="/"><button>back</button></a>
+        <h1>PHP</h1>
+        <h2>ID: {{book.id}}</h2>
+        <h3>Description: {{book.desc}}</h3>
+        <h3>Authors:
+            <ul>
+                {% for author in authors %}
+                    <li>{{author.last_name}}</li>
+                {% endfor %}
+            </ul>
+        <form action="/add-author/{{book.id}}" method="POST">
+            {% csrf_token %} 
+            <select name="add_author" id="add_author">
+                {% for author in all_authors %}
+                    {% if author not in authors %}
+                        <option value="{{author.id}}">{{author.last_name}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <button type="submit">Add</button>
+        </form>
+        </h3>
+    </div>
+</body>
+</html>
